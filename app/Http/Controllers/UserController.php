@@ -27,4 +27,22 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'Usuario eliminado']);
     }
+
+
+    public function getUserRole(Request $request, $userId)
+    {
+        $user = User::with('role')->find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+
+        return response()->json([
+            'user_id' => $user->id,
+            'role_id' => $user->role->role_id, // Accediendo a role_id
+            'role_name' => $user->role->name,
+        ], 200);
+    }
+
+
 }

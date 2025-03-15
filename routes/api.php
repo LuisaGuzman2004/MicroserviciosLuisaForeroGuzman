@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ExternalApiController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -24,3 +25,6 @@ Route::post('/roles', [RoleController::class, 'store']);
 Route::put('/roles/{role}', [RoleController::class, 'update']);
 Route::delete('/roles/{role}', [RoleController::class, 'destroy']);
 });
+
+
+Route::get('/external-event', [ExternalApiController::class, 'getEvents']);
